@@ -1,6 +1,5 @@
 import { GET_ERRORS, SET_CURRENT_USER } from './types';
 import setAuthToken from '../setAuthToken';
-import { history as routeTo } from '../history'
 
 export const registerUser = (user, history) => (dispatch) => {
     axios
@@ -11,7 +10,7 @@ export const registerUser = (user, history) => (dispatch) => {
         .catch((err) => {
             dispatch({
                 type: GET_ERRORS,
-                payload: err.response.data
+                payload: err.response.data.errors
             });
         });
 };
@@ -27,11 +26,21 @@ export const loginUser = (user, history) => (dispatch) => {
             history.push('/dashboard');
         })
         .catch((err) => {
-            console.log(err);
-            dispatch({
-                type: GET_ERRORS,
-                payload: err
-            });
+            console.log(err.response);
+            if (err.response.data.message && !err.response.data.errors) {
+                const errors = {
+                    password: err.response.data.message
+                };
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: errors
+                });
+            } else {
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data.errors
+                });
+            }
         });
 };
 
@@ -48,7 +57,7 @@ export const logoutUser = (history) => (dispatch) => {
             localStorage.removeItem('accessToken');
             setAuthToken(false);
             dispatch(setCurrentUser({}));
-            history.push('/login')
+            history.push('/login');
         }
     });
 };

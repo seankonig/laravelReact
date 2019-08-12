@@ -20,5 +20,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('logout', 'AuthController@logout');
         Route::post('profile', 'AuthController@profile');
+
+        Route::post('tasks', 'TaskController@store');
+        Route::get('tasks', 'TaskController@show');
     });
 });

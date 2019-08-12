@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class DashboardPage extends Component {
     constructor(props) {
@@ -28,12 +28,12 @@ class DashboardPage extends Component {
                                                 </div>
                                             </div>
                                             <div className="card-body">
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-primary btn-sm"
+                                                <Link
+                                                    to={'/tasks'}
+                                                    className="btn btn-sm btn-secondary"
                                                 >
-                                                    New Task
-                                                </button>
+                                                    View Tasks
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

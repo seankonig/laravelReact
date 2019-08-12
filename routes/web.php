@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/login', function () {
+    return view('index');
+});
+
+Route::get('/register', function () {
+    return view('index');
+});
+
+Route::get('/dashboard', function () {
+    return view('index');
+});
+
+Route::get('/tasks', function () {
+    return view('index');
+});
+

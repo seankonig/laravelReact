@@ -41,14 +41,11 @@ class Register extends Component {
             this.props.history.push('/dashboard');
         }
         if (nextProps.errors) {
+            console.log(nextProps)
             this.setState({
-                errors: nextProps.errors.errors.errors
+                errors: nextProps.errors.errors
             });
         }
-    }
-
-    componentDidMount() {
-        console.log(this.props);
     }
 
     render() {
